@@ -1,12 +1,21 @@
 const { Router } = require("express");
-const { read, create, remove, update, readOne } = require("../app");
-const { converIdToNumberMiddleware } = require("../middlewares");
+const {
+  addProductController,
+  deleteProductController,
+  getProductsController,
+  getProductController,
+  updateProductController,
+} = require("../controllers/product");
 
 const productsRouter = Router();
 
-productsRouter.route("/").get(read).post(create);
+productsRouter.route("/").get(getProductsController).post(addProductController);
 
-productsRouter.route("/:id").get(readOne).put(update).delete(remove);
+productsRouter
+  .route("/:id")
+  .get(getProductController)
+  .put(updateProductController)
+  .delete(deleteProductController);
 
 module.exports = {
   productsRouter,

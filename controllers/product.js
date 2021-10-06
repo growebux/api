@@ -1,14 +1,6 @@
-const Product = require("./models/product");
+const Product = require("../models/product");
 
-let techbag = {
-  id: 1,
-  name: "Asus",
-  content: ["intel Pentium Silver", "1TB HDD", "8GB RAM", "Windows 10"],
-};
-
-let eletronics = [techbag];
-
-async function create(req, res) {
+async function addProductController(req, res) {
   const product = req.body;
 
   try {
@@ -17,23 +9,21 @@ async function create(req, res) {
   } catch (e) {
     res.json(e.message);
   }
-
-  //.insertOne(product);
 }
 
-async function readOne(req, res) {
+async function getProductController(req, res) {
   const techBagId = req.params.id;
 
   const product = await Product.findOne({ _id: techBagId });
   res.json(product);
 }
 
-async function read(req, res) {
+async function getProductsController(req, res) {
   const allProducts = await Product.find({});
   res.json(allProducts);
 }
 
-function update(req, res) {
+function updateProductController(req, res) {
   const techBagId = req.params.id;
   const newTechbag = req.body;
 
@@ -62,7 +52,7 @@ function update(req, res) {
   res.json(updatedTechbag);
 }
 
-async function remove(req, res) {
+async function deleteProductController(req, res) {
   const techBagId = req.params.id;
 
   const result = await Product.findOneAndRemove({ _id: techBagId });
@@ -71,9 +61,9 @@ async function remove(req, res) {
 }
 
 module.exports = {
-  read,
-  create,
-  update,
-  remove,
-  readOne,
+  addProductController,
+  getProductController,
+  getProductsController,
+  updateProductController,
+  deleteProductController,
 };

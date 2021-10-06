@@ -13,12 +13,6 @@ function userAuthenticatedMiddleware(req, res, next) {
   });
 }
 
-function converIdToNumberMiddleware(req, res, next) {
-  req.params.id = Number(req.params.id);
-  next();
-}
-
 module.exports = {
-  converIdToNumberMiddleware,
   userAuthenticatedMiddleware,
 };
