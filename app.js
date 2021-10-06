@@ -1,3 +1,5 @@
+const Product = require("./models/product");
+
 let techbag = {
   id: 1,
   name: "Asus",
@@ -6,15 +8,29 @@ let techbag = {
 
 let eletronics = [techbag];
 
-function create(req, res) {
+async function create(req, res) {
   const product = req.body;
-  eletronics.push(product);
 
-  res.json(eletronics);
+  try {
+    const newProduct = await Product.create(product);
+    res.json(newProduct);
+  } catch (e) {
+    res.json(e.message);
+  }
+
+  //.insertOne(product);
 }
 
-function read(req, res) {
-  res.json(eletronics);
+async function readOne(req, res) {
+  const techBagId = req.params.id;
+
+  const product = await Product.findOne({ _id: techBagId });
+  res.json(product);
+}
+
+async function read(req, res) {
+  const allProducts = await Product.find({});
+  res.json(allProducts);
 }
 
 function update(req, res) {
@@ -46,16 +62,12 @@ function update(req, res) {
   res.json(updatedTechbag);
 }
 
-function remove(req, res) {
+async function remove(req, res) {
   const techBagId = req.params.id;
 
-  const removedTechBagList = eletronics.filter(
-    (techBag) => techBag.id !== techBagId
-  );
+  const result = await Product.findOneAndRemove({ _id: techBagId });
 
-  eletronics = removedTechBagList;
-
-  res.json(eletronics);
+  res.json(result);
 }
 
 module.exports = {
@@ -63,4 +75,5 @@ module.exports = {
   create,
   update,
   remove,
+  readOne,
 };

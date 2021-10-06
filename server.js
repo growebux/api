@@ -1,11 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-
+const { connectMongo } = require("./db/mongo");
 const { routes } = require("./routes");
 
-console.log("BestBuy section");
-
+connectMongo();
 app.use(bodyParser.json());
 
 app.use("/", routes);
