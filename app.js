@@ -1,66 +1,66 @@
 let techbag = {
-    id: 1,
-    name: "Asus",
-    content: ["intel Pentium Silver", "1TB HDD", "8GB RAM", "Windows 10"],
+  id: 1,
+  name: "Asus",
+  content: ["intel Pentium Silver", "1TB HDD", "8GB RAM", "Windows 10"],
 };
 
-let eletronics = [techbag]
+let eletronics = [techbag];
 
-function create(newTechbag) {
-    eletronics.push(newTechbag);
+function create(req, res) {
+  const product = req.body;
+  eletronics.push(product);
+
+  res.json(eletronics);
 }
 
-function read(){
-    return eletronics;
+function read(req, res) {
+  res.json(eletronics);
 }
 
-function update(techBagId, newTechbag){
+function update(req, res) {
+  const techBagId = req.params.id;
+  const newTechbag = req.body;
 
-const foundNewTechbag = eletronics.find((techBag) => techbag.id === techBagId);
+  const foundNewTechbag = eletronics.find(
+    (techBag) => techBag.id === techBagId
+  );
 
-if(!foundNewTechbag){
-    return;
-}
+  if (!foundNewTechbag) {
+    return res.json({
+      error: "Sorry no product found with this id",
+      code: 400,
+    });
+  }
 
-
-const updatedTechbag = {
+  const updatedTechbag = {
     ...foundNewTechbag,
     ...newTechbag,
+  };
+
+  const filteredEletronic = eletronics.filter(
+    (techBag) => techBag.id !== techBagId
+  );
+
+  eletronics = [...filteredEletronic, updatedTechbag];
+
+  res.json(updatedTechbag);
+}
+
+function remove(req, res) {
+  const techBagId = req.params.id;
+
+  const removedTechBagList = eletronics.filter(
+    (techBag) => techBag.id !== techBagId
+  );
+
+  eletronics = removedTechBagList;
+
+  res.json(eletronics);
+}
+
+module.exports = {
+  read,
+  create,
+  update,
+  remove,
 };
-
-const filteredEletronic = eletronics.filter((techBag) => techBag.id !== techBagId);
-
-eletronics = [
-    ...filteredEletronic,
-    updatedTechbag];
-}   
-
-function remove(techBagId){
-    const removedTechBagList = eletronics.filter((techBag) => techBag.id !== techBagId);
-
-    eletronics = removedTechBagList;
-}
-
-let result1 = read();
-console.log('old configuration', result1);
-
-let clothesBag = {
-    id:2,
-    name: "Clothes Bag",
-    content: ['T-shirt', 'Hat', 'Pants'],
-}
-
-create(clothesBag);
-
-let result2 = read();
-console.log("after create", result2);
-
-update(1,{name: "Desktop Tech Bag"});
-
-let result3 = read();
-console.log("after update", result3);
-
-remove(2);
-
-let result4 = read();
-console.log("after remove", result4);

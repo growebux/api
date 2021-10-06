@@ -1,0 +1,37 @@
+###
+POST http://localhost:3000/products HTTP/1.1
+content-type: application/json
+
+ {
+    "id": 2,
+    "name": "Macbook",
+    "content": [
+      "intel Pentium Silver",
+      "1TB HDD",
+      "15GB RAM",
+      "MacOS"
+    ]
+  }
+
+###
+PUT http://localhost:3000/products/2 HTTP/1.1
+content-type: application/json
+
+ {
+    "name": "Macbook Pro",
+    "content": [
+      "intel I9",
+      "1TB HDD",
+      "15GB RAM",
+      "MacOS"
+    ]
+  }
+
+
+###
+GET http://localhost:3000/products HTTP/1.1
+content-type: application/json
+
+###
+DELETE http://localhost:3000/products/1 HTTP/1.1
+content-type: application/json
