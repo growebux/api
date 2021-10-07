@@ -1,0 +1,30 @@
+POST http://localhost:3000/users HTTP/1.1
+content-type: application/json
+
+    {
+        "name": "Carla",
+        "age": "25",
+        "gender": "Female",
+        "adress": [
+            "2432 Ave 7, Vancouver, Canada, V5MS3F"
+        ]
+    }
+        
+PUT http://localhost:3000/users/2 HTTP/1.1
+content-type: application/json
+
+    {
+        "name": "Bruno",
+        "age": "34",
+        "gender": "Male",
+        "adress": [
+            "4343 Ave 12", "Vancouver","Canada", "V8GMG"
+        ]
+    }
+        
+GET http://localhost:3000/users HTTP/1.1
+content-type: application/json
+
+
+DELETE http://localhost:3000/users/1 HTTP/1.1
+content-type: application/json
