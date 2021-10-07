@@ -48,7 +48,7 @@ function updateUserController(req, res) {
     );
 
     userDb = [
-        ...filteredUserDb, userDb,
+        ...filteredUserDb, updatedUser,
     ]
     res.json(updatedUser);
     }

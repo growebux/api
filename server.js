@@ -5,6 +5,7 @@ const app = express();
 const { connectMongo } = require("./db/mongo");
 const { routes } = require("./routes");
 
+
 connectMongo();
 app.use(bodyParser.json());
 
