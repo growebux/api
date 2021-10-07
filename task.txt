@@ -1,0 +1,8 @@
+Edivan Henrique05:45
+MONGODB_URI=mongodb+srv://eddie:1N8utt7IrFZyNy9P@cluster0.fhsts.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+Edivan Henrique05:52
+- Cria um novo modelo - Users
+- Cria um crud pra users - users (get, add, remove, update, findOne) 
+- Cria um controller para users
+Edivan Henrique05:58
+server -> routes -> middlewares? -> controllers -> models -> db

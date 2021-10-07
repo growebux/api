@@ -1,3 +1,3 @@
 ## API - mongodb + nodejs 
 
-- Just a bit of code to show
+- Api to add products to the DB.
