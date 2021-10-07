@@ -7,6 +7,7 @@ const {
   updateProductController,
 } = require("../controllers/product");
 
+
 const productsRouter = Router();
 
 productsRouter.route("/").get(getProductsController).post(addProductController);

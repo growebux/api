@@ -19,5 +19,5 @@ usersRouter
   .delete(deleteUserController);
 
 module.exports = {
-  users,
+  usersRouter,
 };
