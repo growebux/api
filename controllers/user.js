@@ -1,74 +1,51 @@
-const User = require("../models/users");
+const User = require("../models/user");
 
-async function addUserController(req, res){
-    const user = req.body;
+async function addUserController(req, res) {
+  const user = req.body;
 
-    try {
-        const newUser = await User.create(user);
-        res.json(newUser);
-    }   catch (e) {
-        res.json(e.message);
-    }
+  try {
+    const newUser = await User.create(user);
+    res.json(newUser);
+  } catch (e) {
+    res.json(e.message);
+  }
 }
 
 async function getUserController(req, res) {
-    const userId = req.params.id;
+  const userId = req.params.id;
 
-    const user = await User.findOne({_id: userId});
-    res.jason(user);
+  const user = await User.findOne({ _id: userId });
+  res.json(user);
 }
 
-async function getUserController(req, res){
-    const allUsers = await User.find({});
-    res.jason(allUsers);
+async function getUsersController(req, res) {
+  const allUsers = await User.find({});
+  res.json(allUsers);
 }
 
-function updateUserController(req, res) {
-    const userId = req.params.id;
-    const newUser = req.body;
+async function updateUserController(req, res) {
+  const userId = req.params.id;
+  const updatedUser = req.body;
 
-    const foundNewUser = userDb.find(
-        (user) => user.id === userId
-    );
+  const updated = await User.findOneAndUpdate({ _id: userId }, updatedUser, {
+    new: true,
+  });
 
-    if (!foundNewUser){
-        return res.jason({
-            error: "Sorry no user associated with this id",
-            code: 400,
-        });
-    }
+  res.json(updated);
+}
 
-    const updatedUser = {
-        ...foundNewUser,
-        ...newUser,
-    };
+async function deleteUserController(req, res) {
+  const userId = req.params.id;
 
-    const filteredUserDb = userDb.filter(
-        (user) => user.id !== userId
-    );
+  const result = await User.findOneAndRemove({ _id: userId });
 
-    userDb = [
-        ...filteredUserDb, updatedUser,
-    ]
-    res.json(updatedUser);
-    }
-
-    async function deleteUserController(req, res){
-        const userId = req.params.id;
-
-        const result = await User.findOneAbdRemove({_id: userId});
-
-        res.json(result);
-    }
-
-
-
+  res.json(result);
+}
 
 module.exports = {
-    addUserController,
-    getUserController,
-    getUserController,
-    updateUserController,
-    deleteUserController,
-  };
-  
+  addUserController,
+  getUserController,
+  getUsersController,
+  updateUserController,
+  deleteUserController,
+};

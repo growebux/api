@@ -1,0 +1,32 @@
+###
+POST http://localhost:3000/users HTTP/1.1
+content-type: application/json
+
+ {
+    "name": "Eddie Silva",
+    "age": 30,
+    "gender": "male",
+    "address": "2456 Point Grey"
+  }
+
+###
+PUT http://localhost:3000/users/615fbc9bd2490e8b19e551c1 HTTP/1.1
+content-type: application/json
+
+ {
+    "name": "Rafael Lopez",
+    "address": "1922 Kingsway "
+  }
+
+###
+GET http://localhost:3000/users HTTP/1.1
+content-type: application/json
+
+###
+GET http://localhost:3000/users/615fbc81d2490e8b19e551bf HTTP/1.1
+content-type: application/json
+
+###
+DELETE  http://localhost:3000/users/615fbc81d2490e8b19e551bf HTTP/1.1
+content-type: application/json
+

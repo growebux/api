@@ -3,13 +3,13 @@ const {
   addUserController,
   deleteUserController,
   getUserController,
+  getUsersController,
   updateUserController,
 } = require("../controllers/user");
 
-
 const usersRouter = Router();
 
-usersRouter.route("/").get(getUserController).post(addUserController);
+usersRouter.route("/").get(getUsersController).post(addUserController);
 
 usersRouter
   .route("/:id")

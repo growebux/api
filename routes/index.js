@@ -6,10 +6,8 @@ const { userAuthenticatedMiddleware } = require("../middlewares");
 const routes = Router();
 
 routes.use("/products", userAuthenticatedMiddleware, productsRouter);
-app.use("/users", userAuthenticatedMiddleware, usersRouter);
+routes.use("/users", userAuthenticatedMiddleware, usersRouter);
+
 module.exports = {
   routes,
 };
-
-
-

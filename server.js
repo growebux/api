@@ -1,10 +1,11 @@
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
-const app = express();
+
 const { connectMongo } = require("./db/mongo");
 const { routes } = require("./routes");
 
+const app = express();
 
 connectMongo();
 app.use(bodyParser.json());
